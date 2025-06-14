@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { DrawerActions, NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Screen1 from './screens/Screen1';
 import Screen2 from './screens/Screen2';
@@ -13,21 +13,37 @@ const Drawer = createDrawerNavigator();
 const Top = createMaterialTopTabNavigator()
 const Stack = createNativeStackNavigator();
 
+
 function DrawerNavigator() {
+
+    const navigation = useNavigation()
     return (
         <Drawer.Navigator drawerContent={(props) => (
-            <DrawerContentScrollView {...props}>
-                <View >
-                    <View style={{ height: 250, alignItems: 'center', justifyContent: 'center', backgroundColor: 'lightgray', marginBottom: 10, borderRadius: 10 }}>
-                        <Ionicons name="game-controller" size={150} color="darkslategray" />
+            <DrawerContentScrollView {...props} >
+                <View style={{ height: '100%' }}>
+                    <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'lightblue', marginBottom: 10, borderRadius: 30, padding: 10 }}>
+                        <Ionicons name="game-controller" size={25} color="darkslategray" />
                         <Text >SkaterBoy Store.</Text>
                     </View>
 
                 </View>
-                <DrawerItemList {...props} />
+                <View style={{ height: '100%', marginTop: 10, backgroundColor: 'lightgreen', borderRadius: 30, marginBottom: 10 }}>
+                    <DrawerItemList {...props} />
+
+                </View>
+                <View style={{ alignItems: 'center', padding: 10, backgroundColor: 'purple', borderRadius: 30 }}>
+                    <Text style={{ color: 'white' }}>www.cheapshark.com</Text>
+                </View>
+
             </DrawerContentScrollView>
         )}
-            screenOptions={{ drawerActiveBackgroundColor: 'darkslategray', drawerActiveTintColor: 'white', }}
+            screenOptions={{
+                drawerActiveBackgroundColor: 'darkslategray', drawerActiveTintColor: 'white', headerLeft: () =>
+                    <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} >
+                        <Ionicons name='menu' size={30} color={'darkslategray'} style={{ marginLeft: 5 }} />
+                    </TouchableOpacity>
+
+            }}
 
         >
 

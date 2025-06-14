@@ -1,16 +1,18 @@
-import { View, Text, FlatList, ScrollView, Image, ImageBackground, StyleSheet } from 'react-native'
+import { View, Text, FlatList, ScrollView, Image, ImageBackground, StyleSheet, Button } from 'react-native'
 import React from 'react'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+
 
 const Screen3 = () => {
 
     const route = useRoute()
     const { item } = route.params
+    const navigation = useNavigation()
 
     return (
-        <>
-            <ImageBackground source={{ uri: item.thumb }} style={{ width: '100%', height: 200, justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ backgroundColor: 'black', padding: 10, borderRadius: 10, opacity: 0.7, width: '100%', height: 200, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, backgroundColor: 'white', height: '95%' }}>
+            <ImageBackground source={{ uri: item.thumb }} style={{ width: '100%', alignSelf: 'center', height: 200, justifyContent: 'center', borderRadius: 10 }}>
+                <View style={{ backgroundColor: 'black', padding: 10, opacity: 0.7, width: '100%', height: 200, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }}>
                     <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>{item.title}</Text>
                 </View>
             </ImageBackground>
@@ -34,8 +36,12 @@ const Screen3 = () => {
                         <Text style={styles.details2}> {item.steamRatingText}</Text>
                     </View>
                 </View>
+                <View style={{ height: 50, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                    <Button title="Go Back" onPress={() => navigation.goBack()} color='darkslategray' />
+                </View>
             </ScrollView>
-        </>
+
+        </View>
     )
 }
 
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     box: {
-        backgroundColor: 'white',
+        backgroundColor: 'lightgreen',
         padding: 10,
         margin: 10,
         borderRadius: 10,
